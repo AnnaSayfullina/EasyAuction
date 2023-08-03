@@ -7,7 +7,10 @@ import com.example.course_easyauction.model.Status;
 import com.example.course_easyauction.service.BidService;
 import com.example.course_easyauction.service.LotService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,6 +19,24 @@ import org.springframework.web.bind.annotation.*;
 public class LotController {
 
     private final LotService lotService;
+
+    private final BidService bidService;
+
+    /**
+     * Получить информацию о первом ставившем на лот. Возвращает первого ставившего на этот лот
+     */
+    @GetMapping("{id}/first")
+    public Bid getFirstBidder(@PathVariable int id){
+        return bidService.getFirstBidder(id);
+    }
+
+    /**
+     *Возвращает имя ставившего на данный лот наибольшее количество раз
+     */
+    @GetMapping("{id}/frequent")
+    public Bid getMostFrequentBidder(@PathVariable int id){
+        return bidService.getMostFrequentBidder(id);
+    }
 
     /**
      * Получить полную информацию о лоте
@@ -33,6 +54,17 @@ public class LotController {
     @PostMapping("{id}/start")
     public void startBidding(@PathVariable int id){
         lotService.startBidding(id);
+
+    }
+
+    /**
+     * Сделать ставку по лоту
+     * Создает новую ставку по лоту. Если лот в статусе CREATED или STOPPED, то должна вернутся ошибка
+     */
+    @PostMapping("{id}/bid")
+    public void createBid(@PathVariable int id,
+                          @RequestParam("Bidder name") String bidderName) {
+        bidService.createBid(id, bidderName);
 
     }
 
@@ -75,8 +107,12 @@ public class LotController {
      * Экспортировать все лоты в формате id,title,status,lastBidder,currentPrice в одном файле CSV
      */
     @GetMapping(value = "export", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    public void getCSVFile (){
-
+    public ResponseEntity<Resource> getCSVFile (){
+        Resource resource = lotService.getCSVFile();
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + "LotsInfo.csv" + "\"")
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .body(resource);
     }
 
 
