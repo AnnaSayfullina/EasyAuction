@@ -1,7 +1,11 @@
 package com.example.course_easyauction.controller;
 
 import com.example.course_easyauction.dto.CreateLot;
+import com.example.course_easyauction.dto.LotFullInfo;
+import com.example.course_easyauction.model.Bid;
 import com.example.course_easyauction.model.Status;
+import com.example.course_easyauction.service.BidService;
+import com.example.course_easyauction.service.LotService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -14,28 +18,12 @@ public class LotController {
     private final LotService lotService;
 
     /**
-     * Получить информацию о первом ставившем на лот. Возвращает первого ставившего на этот лот
-     */
-    @GetMapping("{id}/first")
-    public Bidder getFirstBidder(@PathVariable int id){
-        return null;
-    }
-
-    /**
-     *Возвращает имя ставившего на данный лот наибольшее количество раз
-     */
-    @GetMapping("{id}/frequent")
-    public Bidder getMostFrequentBidder(@PathVariable int id){
-        return null;
-    }
-
-    /**
      * Получить полную информацию о лоте
      */
 
     @GetMapping("{id}")
     public LotFullInfo getFullLot(@PathVariable int id){
-        return null;
+        return lotService.getFullLot(id);
     }
 
     /** Начать торги по лоту
@@ -44,15 +32,7 @@ public class LotController {
      */
     @PostMapping("{id}/start")
     public void startBidding(@PathVariable int id){
-
-    }
-
-    /**
-     * Сделать ставку по лоту
-     * Создает новую ставку по лоту. Если лот в статусе CREATED или STOPPED, то должна вернутся ошибка
-     */
-    @PostMapping("{id}/bid")
-    public void createBid(@PathVariable int id){
+        lotService.startBidding(id);
 
     }
 
@@ -62,6 +42,7 @@ public class LotController {
      */
     @PostMapping("{id}/stop")
     public void stopBidding(@PathVariable int id){
+        lotService.stopBidding(id);
 
     }
 
@@ -72,6 +53,7 @@ public class LotController {
 
     @PostMapping("/")
     public void createLot(@RequestBody CreateLot createLot){
+        lotService.createLot(createLot);
 
     }
 
@@ -82,8 +64,9 @@ public class LotController {
      *  Номера страниц начинаются с 0. Лимит на количество лотов на странице - 10 штук.
      */
     @GetMapping("page")
-    public void findLots(@RequestParam(value = "status", defaultValue = "CREATED") Status status,
+    public List<LotDTO> findLots(@RequestParam(value = "status", defaultValue = "CREATED") Status status,
                          @RequestParam(required = false, defaultValue = "0") int page) {
+        return lotService.findLots(status, page);
 
     }
 
