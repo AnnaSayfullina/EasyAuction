@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: Anna
+      changes:
+        - tagDatabase:
+            tag: 2.0
+        - createTable:
+            tableName: bid
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: bidder_name
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: bidder_date_time
+                  type: timestamp
+                  constraints:
+                    nullable: false

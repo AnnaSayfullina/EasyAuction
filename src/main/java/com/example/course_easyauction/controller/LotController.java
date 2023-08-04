@@ -5,7 +5,9 @@ import com.example.course_easyauction.dto.LotFullInfo;
 import com.example.course_easyauction.model.Bid;
 import com.example.course_easyauction.model.Status;
 import com.example.course_easyauction.service.BidService;
+import com.example.course_easyauction.dto.LotDTO;
 import com.example.course_easyauction.service.LotService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -13,9 +15,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("lot")
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
+@AllArgsConstructor
 public class LotController {
 
     private final LotService lotService;
@@ -97,7 +102,7 @@ public class LotController {
      */
     @GetMapping("page")
     public List<LotDTO> findLots(@RequestParam(value = "status", defaultValue = "CREATED") Status status,
-                         @RequestParam(required = false, defaultValue = "0") int page) {
+                                 @RequestParam(required = false, defaultValue = "0") int page) {
         return lotService.findLots(status, page);
 
     }

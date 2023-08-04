@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Anna
+      changes:
+        - tagDatabase:
+            tag: 1.0
+        - createTable:
+            tableName: lot
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(7)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(4096)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_price
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: bid_price
+                  type: int
+                  constraints:
+                    nullable: false
