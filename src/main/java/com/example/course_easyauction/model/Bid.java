@@ -31,16 +31,23 @@ public class Bid {
     @JoinColumn(name = "lot_id")
     private Lot lot;
 
+    public Bid(String bidderName) {
+        this.bidderName = bidderName;
+        this.bidderDate = LocalDateTime.now();
+
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bid bid = (Bid) o;
-        return id == bid.id && Objects.equals(bidderName, bid.bidderName) && Objects.equals(bidderDate, bid.bidderDate) && Objects.equals(lot, bid.lot);
+        return id == bid.id && Objects.equals(bidderName, bid.bidderName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, bidderName, bidderDate, lot);
+        return Objects.hash(id, bidderName);
     }
 }

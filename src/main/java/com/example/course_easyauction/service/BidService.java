@@ -1,13 +1,13 @@
 package com.example.course_easyauction.service;
 
+import com.example.course_easyauction.dto.Bidder;
 import com.example.course_easyauction.model.Bid;
-import org.springframework.stereotype.Service;
 
 
 public interface BidService {
-    Bid getFirstBidder(int id);
+    Bidder getFirstBidder(int id);
 
-    Bid getMostFrequentBidder(int id);
+    Bidder getMostFrequentBidder(int id);
 
     void createBid(int id, String bidderName);
 }

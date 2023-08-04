@@ -1,5 +1,6 @@
 package com.example.course_easyauction.controller;
 
+import com.example.course_easyauction.dto.Bidder;
 import com.example.course_easyauction.dto.CreateLot;
 import com.example.course_easyauction.dto.LotFullInfo;
 import com.example.course_easyauction.model.Bid;
@@ -8,7 +9,6 @@ import com.example.course_easyauction.service.BidService;
 import com.example.course_easyauction.dto.LotDTO;
 import com.example.course_easyauction.service.LotService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -31,7 +31,7 @@ public class LotController {
      * Получить информацию о первом ставившем на лот. Возвращает первого ставившего на этот лот
      */
     @GetMapping("{id}/first")
-    public Bid getFirstBidder(@PathVariable int id){
+    public Bidder getFirstBidder(@PathVariable int id){
         return bidService.getFirstBidder(id);
     }
 
@@ -39,7 +39,7 @@ public class LotController {
      *Возвращает имя ставившего на данный лот наибольшее количество раз
      */
     @GetMapping("{id}/frequent")
-    public Bid getMostFrequentBidder(@PathVariable int id){
+    public Bidder getMostFrequentBidder(@PathVariable int id){
         return bidService.getMostFrequentBidder(id);
     }
 

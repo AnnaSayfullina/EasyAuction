@@ -44,7 +44,6 @@ public class Lot {
     private int bidPrice;
 
     @OneToMany(mappedBy = "lot", fetch = FetchType.EAGER)
-//    @JoinColumn(name="id")
     List<Bid> bidList;
 
 
