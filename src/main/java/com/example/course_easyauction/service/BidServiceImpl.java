@@ -2,7 +2,6 @@ package com.example.course_easyauction.service;
 
 import com.example.course_easyauction.dto.BidDTO;
 import com.example.course_easyauction.dto.Bidder;
-import com.example.course_easyauction.dto.LotDTO;
 import com.example.course_easyauction.exceptions.IncorrectLotStatus;
 import com.example.course_easyauction.exceptions.LotNotFoundException;
 import com.example.course_easyauction.model.Bid;
@@ -73,8 +72,6 @@ public class BidServiceImpl implements BidService{
             Bid bid = new Bid(bidderName);
             bid.setLot(lot);
 
-            bidRepository.save(bid);
-
             List<Bid> bidList = lot.getBidList();
             bidList.add(bid);
             lot.setBidList(bidList);
@@ -88,11 +85,5 @@ public class BidServiceImpl implements BidService{
             throw new IncorrectLotStatus();
 
         }
-
-
-
-
     }
-
-
 }

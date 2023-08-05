@@ -43,7 +43,7 @@ public class Lot {
     @Column(name = "bid_price")
     private int bidPrice;
 
-    @OneToMany(mappedBy = "lot", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "lot", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Bid> bidList;
 
 

@@ -15,7 +15,6 @@ public class Bidder implements Serializable {
     private String bidderName;
     private LocalDateTime bidderDate;
 
-
     public static Bidder fromBidDto(BidDTO bidDTO){
         Bidder bidderFirst = new Bidder();
 

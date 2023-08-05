@@ -27,7 +27,7 @@ public class Bid {
     @Column(name = "bidder_date_time")
     private LocalDateTime bidderDate;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "lot_id")
     private Lot lot;
 
@@ -36,8 +36,6 @@ public class Bid {
         this.bidderDate = LocalDateTime.now();
 
     }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

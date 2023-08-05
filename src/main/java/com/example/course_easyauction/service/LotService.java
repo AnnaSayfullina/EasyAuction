@@ -7,6 +7,7 @@ import com.example.course_easyauction.model.Status;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 

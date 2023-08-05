@@ -3,7 +3,6 @@ package com.example.course_easyauction.controller;
 import com.example.course_easyauction.dto.Bidder;
 import com.example.course_easyauction.dto.CreateLot;
 import com.example.course_easyauction.dto.LotFullInfo;
-import com.example.course_easyauction.model.Bid;
 import com.example.course_easyauction.model.Status;
 import com.example.course_easyauction.service.BidService;
 import com.example.course_easyauction.dto.LotDTO;
@@ -101,8 +100,8 @@ public class LotController {
      *  Номера страниц начинаются с 0. Лимит на количество лотов на странице - 10 штук.
      */
     @GetMapping("page")
-    public List<LotDTO> findLots(@RequestParam(value = "status", defaultValue = "CREATED") Status status,
-                                 @RequestParam(required = false, defaultValue = "0") int page) {
+    public List<LotDTO> findLots(@RequestParam(value = "status") Status status,
+                                 @RequestParam(required = false) int page) {
         return lotService.findLots(status, page);
 
     }

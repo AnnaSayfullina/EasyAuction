@@ -1,7 +1,6 @@
 package com.example.course_easyauction.service;
 
 import com.example.course_easyauction.dto.Bidder;
-import com.example.course_easyauction.model.Bid;
 
 
 public interface BidService {

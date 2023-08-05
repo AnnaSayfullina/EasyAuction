@@ -18,9 +18,6 @@ public class LotDTO {
     private int startPrice;
     private int bidPrice;
 
-
-
-
     public LotDTO(Status status, String title, String description, int startPrice, int bidPrice) {
         this.status = status;
         this.title = title;
@@ -52,4 +49,5 @@ public class LotDTO {
 
         return lot;
     }
+
 }
