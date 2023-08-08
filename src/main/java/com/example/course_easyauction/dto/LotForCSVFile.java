@@ -24,7 +24,7 @@ public class LotForCSVFile {
         forCSVFile.setId(lot.getId());
         forCSVFile.setStatus(lot.getStatus());
         forCSVFile.setTitle(lot.getTitle());
-        if (lot.getBidList().size() != 0) {
+        if (!lot.getBidList().isEmpty()) {
             Bid bid = lot.getBidList().get(lot.getBidList().size()-1);
             forCSVFile.setLastBidderName(bid.getBidderName());
         }

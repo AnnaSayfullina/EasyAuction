@@ -31,7 +31,7 @@ public class LotServiceImpl implements LotService{
 
     private final LotRepository lotRepository;
 
-    Logger logger = LoggerFactory.getLogger(BidServiceImpl.class);
+    Logger logger = LoggerFactory.getLogger(LotServiceImpl.class);
 
     public LotServiceImpl(LotRepository lotRepository) {
         this.lotRepository = lotRepository;
@@ -89,7 +89,7 @@ public class LotServiceImpl implements LotService{
     public void createLot(CreateLot createLot) {
         logger.info("Вызван метод создания нового лота {}", createLot);
 
-        if(!createLot.getTitle().isEmpty() & !createLot.getDescription().isEmpty()
+        if(!createLot.getTitle().isEmpty() || !createLot.getDescription().isEmpty()
             & createLot.getStartPrice() != 0 & createLot.getBidPrice()!= 0) {
             Lot lot = createLot.toLot();
             lotRepository.save(lot);
